@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Wireframe Canvas</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      background: #1a1a1a;
+      color: #ccc;
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+    }
+    .toolbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 48px;
+      padding: 0 24px;
+      background: #2a2a2a;
+      border-bottom: 1px solid #3a3a3a;
+      flex-shrink: 0;
+    }
+    .toolbar__title {
+      font-size: 14px;
+      font-weight: 600;
+      color: #eee;
+    }
+    .toolbar__count {
+      font-size: 13px;
+      color: #888;
+    }
+    .toolbar__zoom {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .toolbar__zoom button {
+      width: 28px;
+      height: 28px;
+      border: 1px solid #444;
+      border-radius: 4px;
+      background: #333;
+      color: #ccc;
+      font-size: 16px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      line-height: 1;
+    }
+    .toolbar__zoom button:hover { background: #444; }
+    .toolbar__zoom-level {
+      font-size: 13px;
+      color: #aaa;
+      min-width: 40px;
+      text-align: center;
+    }
+    .canvas {
+      flex: 1;
+      overflow: auto;
+      padding: 60px 80px;
+      display: flex;
+      gap: 60px;
+      align-items: flex-start;
+      flex-wrap: wrap;
+    }
+    .frame-wrapper {
+      flex-shrink: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+    .frame-container {
+      overflow: hidden;
+      border-radius: 3px;
+      box-shadow: 0 8px 30px rgba(0,0,0,0.4);
+    }
+    .frame-container iframe {
+      display: block;
+      width: 1280px;
+      height: 720px;
+      border: none;
+      transform-origin: top left;
+      background: #fff;
+    }
+    .frame-label {
+      font-size: 12px;
+      color: #666;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+  </style>
+</head>
+<body>
+  <div class="toolbar">
+    <div class="toolbar__title">Wireframe canvas</div>
+    <div class="toolbar__count" id="screen-count">0 screens</div>
+    <div class="toolbar__zoom">
+      <button id="zoom-out">&minus;</button>
+      <span class="toolbar__zoom-level" id="zoom-level">25%</span>
+      <button id="zoom-in">+</button>
+    </div>
+  </div>
+  <div class="canvas" id="canvas"></div>
+
+  <script>
+    const ZOOM_STEPS = [0.10, 0.15, 0.20, 0.25, 0.33, 0.50, 0.75, 1.00];
+    const FRAME_W = 1280;
+    const FRAME_H = 720;
+    let zoomIndex = 3; // 0.25
+    let currentScreens = []; // filenames currently rendered
+
+    const canvas = document.getElementById('canvas');
+    const countEl = document.getElementById('screen-count');
+    const zoomEl = document.getElementById('zoom-level');
+
+    function getScale() { return ZOOM_STEPS[zoomIndex]; }
+
+    function updateZoomDisplay() {
+      zoomEl.textContent = Math.round(getScale() * 100) + '%';
+    }
+
+    function applyZoomToAll() {
+      const scale = getScale();
+      canvas.querySelectorAll('.frame-wrapper').forEach(wrapper => {
+        const iframe = wrapper.querySelector('iframe');
+        iframe.style.transform = `scale(${scale})`;
+        const container = wrapper.querySelector('.frame-container');
+        container.style.width = (FRAME_W * scale) + 'px';
+        container.style.height = (FRAME_H * scale) + 'px';
+      });
+    }
+
+    document.getElementById('zoom-out').addEventListener('click', () => {
+      if (zoomIndex > 0) { zoomIndex--; updateZoomDisplay(); applyZoomToAll(); }
+    });
+    document.getElementById('zoom-in').addEventListener('click', () => {
+      if (zoomIndex < ZOOM_STEPS.length - 1) { zoomIndex++; updateZoomDisplay(); applyZoomToAll(); }
+    });
+
+    function createFrame(screen) {
+      const scale = getScale();
+      const wrapper = document.createElement('div');
+      wrapper.className = 'frame-wrapper';
+      wrapper.dataset.file = screen.file;
+
+      const container = document.createElement('div');
+      container.className = 'frame-container';
+      container.style.width = (FRAME_W * scale) + 'px';
+      container.style.height = (FRAME_H * scale) + 'px';
+
+      const iframe = document.createElement('iframe');
+      iframe.src = 'screens/' + screen.file;
+      iframe.style.transform = `scale(${scale})`;
+      container.appendChild(iframe);
+
+      const label = document.createElement('div');
+      label.className = 'frame-label';
+      label.textContent = screen.label;
+
+      wrapper.appendChild(container);
+      wrapper.appendChild(label);
+      return wrapper;
+    }
+
+    async function pollScreens() {
+      try {
+        const res = await fetch('/api/screens');
+        const screens = await res.json();
+        const newFiles = screens.map(s => s.file);
+        const oldFiles = currentScreens;
+
+        if (JSON.stringify(newFiles) === JSON.stringify(oldFiles)) return;
+
+        // Remove deleted
+        oldFiles.forEach(file => {
+          if (!newFiles.includes(file)) {
+            const el = canvas.querySelector(`[data-file="${file}"]`);
+            if (el) el.remove();
+          }
+        });
+
+        // Add new
+        screens.forEach(screen => {
+          if (!oldFiles.includes(screen.file)) {
+            canvas.appendChild(createFrame(screen));
+          }
+        });
+
+        currentScreens = newFiles;
+        const n = currentScreens.length;
+        countEl.textContent = n + (n === 1 ? ' screen' : ' screens');
+      } catch (e) {
+        // silently retry next interval
+      }
+    }
+
+    updateZoomDisplay();
+    pollScreens();
+    setInterval(pollScreens, 3000);
+  </script>
+</body>
+</html>

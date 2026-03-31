@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <link rel="stylesheet" href="../components/index.css" />
+  <style>
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 14px;
+    }
+  </style>
+</head>
+<body>
+<div class="page">
+  <nav class="top-nav">
+    <div class="top-nav__logo"></div>
+    <div class="top-nav__links">
+      <span class="top-nav__link top-nav__link--active">Dashboard</span>
+      <span class="top-nav__link">Users</span>
+      <span class="top-nav__link">Analytics</span>
+      <span class="top-nav__link">Settings</span>
+    </div>
+    <div class="top-nav__right">
+      <div class="top-nav__avatar"></div>
+    </div>
+  </nav>
+
+  <div class="page-body">
+    <aside class="sidebar">
+      <div class="sidebar__section-label">Main</div>
+      <div class="sidebar__item sidebar__item--active">
+        <div class="sidebar__icon"></div>
+        Overview
+      </div>
+      <div class="sidebar__item">
+        <div class="sidebar__icon"></div>
+        Reports
+      </div>
+      <div class="sidebar__item">
+        <div class="sidebar__icon"></div>
+        Activity
+      </div>
+      <div class="sidebar__divider"></div>
+      <div class="sidebar__section-label">Manage</div>
+      <div class="sidebar__item">
+        <div class="sidebar__icon"></div>
+        Team
+      </div>
+      <div class="sidebar__item">
+        <div class="sidebar__icon"></div>
+        Billing
+      </div>
+    </aside>
+
+    <main class="main-content">
+      <div class="page-header">
+        <div>
+          <div class="page-title">Dashboard</div>
+          <div class="page-subtitle">Welcome back, Sarah</div>
+        </div>
+        <div class="btn-group">
+          <button class="btn btn--secondary btn--sm">Export</button>
+          <button class="btn btn--primary btn--sm">Add widget</button>
+        </div>
+      </div>
+
+      <div class="stats-grid">
+        <div class="card">
+          <div class="card__title">Total users</div>
+          <div class="card__value">12,847</div>
+          <div class="card__meta">+3.2% from last month</div>
+        </div>
+        <div class="card">
+          <div class="card__title">Revenue</div>
+          <div class="card__value">$48,290</div>
+          <div class="card__meta">+12.5% from last month</div>
+        </div>
+        <div class="card">
+          <div class="card__title">Active sessions</div>
+          <div class="card__value">1,429</div>
+          <div class="card__meta">-2.1% from last hour</div>
+        </div>
+        <div class="card">
+          <div class="card__title">Conversion rate</div>
+          <div class="card__value">3.6%</div>
+          <div class="card__meta">+0.4% from last week</div>
+        </div>
+      </div>
+
+      <div class="table-wrap">
+        <div class="table-toolbar">
+          <span class="text-sm" style="font-weight: 500">Recent activity</span>
+          <button class="btn btn--ghost btn--sm">View all</button>
+        </div>
+        <table class="table">
+          <thead>
+            <tr>
+              <th>User</th>
+              <th>Action</th>
+              <th>Date</th>
+              <th>Status</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>James Wilson</td>
+              <td>Created new project</td>
+              <td>Mar 28, 2026</td>
+              <td><span class="badge badge--success">Completed</span></td>
+            </tr>
+            <tr>
+              <td>Emily Chen</td>
+              <td>Updated billing info</td>
+              <td>Mar 27, 2026</td>
+              <td><span class="badge badge--info">In progress</span></td>
+            </tr>
+            <tr>
+              <td>Michael Torres</td>
+              <td>Invited team member</td>
+              <td>Mar 27, 2026</td>
+              <td><span class="badge badge--success">Completed</span></td>
+            </tr>
+            <tr>
+              <td>Olivia Patel</td>
+              <td>Submitted support ticket</td>
+              <td>Mar 26, 2026</td>
+              <td><span class="badge badge--warning">Pending</span></td>
+            </tr>
+            <tr>
+              <td>Daniel Kim</td>
+              <td>Cancelled subscription</td>
+              <td>Mar 25, 2026</td>
+              <td><span class="badge badge--danger">Cancelled</span></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </main>
+  </div>
+</div>
+</body>
+</html>

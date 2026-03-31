@@ -1,0 +1,536 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Component Gallery</title>
+  <link rel="stylesheet" href="components/index.css" />
+  <style>
+    body { padding: 40px 60px; max-width: 1200px; }
+    .gallery-section { margin-bottom: 48px; }
+    .gallery-section h2 {
+      font-size: 20px;
+      font-weight: 600;
+      margin-bottom: 8px;
+      color: var(--color-text-primary);
+    }
+    .gallery-section p {
+      font-size: 13px;
+      color: var(--color-text-muted);
+      margin-bottom: 20px;
+    }
+    .gallery-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      align-items: flex-start;
+      margin-bottom: 16px;
+    }
+    .gallery-item {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      align-items: flex-start;
+    }
+    .gallery-label {
+      font-size: 11px;
+      font-family: monospace;
+      color: var(--color-text-muted);
+    }
+    .gallery-divider {
+      height: 1px;
+      background: var(--color-border);
+      margin: 40px 0;
+    }
+    .gallery-preview {
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-md);
+      padding: 20px;
+      background: var(--color-bg);
+    }
+    .gallery-preview--dark {
+      background: var(--color-bg-surface);
+    }
+    .gallery-inline-row {
+      display: flex;
+      gap: 16px;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+  </style>
+</head>
+<body>
+  <h1 style="margin-bottom: 8px;">Component Gallery</h1>
+  <p class="text-muted" style="margin-bottom: 40px;">Visual reference for all wireframe components and their variants.</p>
+
+  <!-- Buttons -->
+  <section class="gallery-section">
+    <h2>Buttons</h2>
+    <p>button.css — Base .btn class with variant modifiers</p>
+
+    <div class="gallery-row">
+      <div class="gallery-item">
+        <button class="btn btn--primary">Primary</button>
+        <span class="gallery-label">.btn--primary</span>
+      </div>
+      <div class="gallery-item">
+        <button class="btn btn--secondary">Secondary</button>
+        <span class="gallery-label">.btn--secondary</span>
+      </div>
+      <div class="gallery-item">
+        <button class="btn btn--success">Success</button>
+        <span class="gallery-label">.btn--success</span>
+      </div>
+      <div class="gallery-item">
+        <button class="btn btn--danger">Danger</button>
+        <span class="gallery-label">.btn--danger</span>
+      </div>
+      <div class="gallery-item">
+        <button class="btn btn--ghost">Ghost</button>
+        <span class="gallery-label">.btn--ghost</span>
+      </div>
+    </div>
+
+    <div class="gallery-row">
+      <div class="gallery-item">
+        <button class="btn btn--primary btn--sm">Small</button>
+        <span class="gallery-label">.btn--sm</span>
+      </div>
+      <div class="gallery-item">
+        <button class="btn btn--primary">Default</button>
+        <span class="gallery-label">.btn (default)</span>
+      </div>
+      <div class="gallery-item">
+        <button class="btn btn--primary btn--lg">Large</button>
+        <span class="gallery-label">.btn--lg</span>
+      </div>
+      <div class="gallery-item">
+        <button class="btn btn--secondary btn--icon">+</button>
+        <span class="gallery-label">.btn--icon</span>
+      </div>
+    </div>
+
+    <div class="gallery-row">
+      <div class="gallery-item">
+        <div class="btn-group">
+          <button class="btn btn--secondary btn--sm">Cancel</button>
+          <button class="btn btn--primary btn--sm">Save</button>
+        </div>
+        <span class="gallery-label">.btn-group</span>
+      </div>
+    </div>
+  </section>
+
+  <div class="gallery-divider"></div>
+
+  <!-- Badges -->
+  <section class="gallery-section">
+    <h2>Badges</h2>
+    <p>badge.css — Inline status indicators</p>
+
+    <div class="gallery-row">
+      <div class="gallery-item">
+        <span class="badge badge--default">Default</span>
+        <span class="gallery-label">.badge--default</span>
+      </div>
+      <div class="gallery-item">
+        <span class="badge badge--success">Active</span>
+        <span class="gallery-label">.badge--success</span>
+      </div>
+      <div class="gallery-item">
+        <span class="badge badge--warning">Pending</span>
+        <span class="gallery-label">.badge--warning</span>
+      </div>
+      <div class="gallery-item">
+        <span class="badge badge--danger">Error</span>
+        <span class="gallery-label">.badge--danger</span>
+      </div>
+      <div class="gallery-item">
+        <span class="badge badge--info">Info</span>
+        <span class="gallery-label">.badge--info</span>
+      </div>
+    </div>
+
+    <div class="gallery-row">
+      <div class="gallery-item">
+        <span class="badge badge--success badge--outline">Outline</span>
+        <span class="gallery-label">.badge--outline</span>
+      </div>
+      <div class="gallery-item">
+        <span class="badge badge--info badge--pill">Pill</span>
+        <span class="gallery-label">.badge--pill</span>
+      </div>
+      <div class="gallery-item">
+        <span class="badge badge--danger badge--pill badge--outline">Pill + Outline</span>
+        <span class="gallery-label">.badge--pill.badge--outline</span>
+      </div>
+    </div>
+  </section>
+
+  <div class="gallery-divider"></div>
+
+  <!-- Cards -->
+  <section class="gallery-section">
+    <h2>Cards</h2>
+    <p>card.css — Content containers with optional header, body, footer</p>
+
+    <div class="gallery-row" style="gap: 16px;">
+      <div class="gallery-item" style="width: 220px;">
+        <div class="card">
+          <div class="card__title">Total users</div>
+          <div class="card__value">12,847</div>
+          <div class="card__meta">+3.2% from last month</div>
+        </div>
+        <span class="gallery-label">.card (stat card)</span>
+      </div>
+      <div class="gallery-item" style="width: 220px;">
+        <div class="card card--flat">
+          <div class="card__header">
+            <div class="card__title">Flat card</div>
+          </div>
+          <div class="card__body">
+            <span class="text-sm">Content area with no shadow.</span>
+          </div>
+        </div>
+        <span class="gallery-label">.card--flat</span>
+      </div>
+      <div class="gallery-item" style="width: 220px;">
+        <div class="card card--interactive">
+          <div class="card__header">
+            <div class="card__title">Interactive</div>
+          </div>
+          <div class="card__body">
+            <span class="text-sm">Hover for elevated shadow.</span>
+          </div>
+          <div class="card__footer">
+            <span class="text-muted">Footer area</span>
+          </div>
+        </div>
+        <span class="gallery-label">.card--interactive</span>
+      </div>
+    </div>
+  </section>
+
+  <div class="gallery-divider"></div>
+
+  <!-- Forms -->
+  <section class="gallery-section">
+    <h2>Forms</h2>
+    <p>form.css — Input fields, selects, textareas, toggles, checkboxes, radios</p>
+
+    <div class="gallery-preview" style="max-width: 500px;">
+      <div class="form-section">
+        <div class="form-section__title">Profile details</div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label">First name</label>
+            <input class="form-input" value="Sarah" />
+          </div>
+          <div class="form-group">
+            <label class="form-label">Last name</label>
+            <input class="form-input" value="Connor" />
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">Email</label>
+          <input class="form-input" value="sarah@example.com" />
+          <span class="form-hint">We'll never share your email.</span>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">Error state</label>
+          <input class="form-input form-input--error" value="bad-email" />
+          <span class="form-error">Please enter a valid email address.</span>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">Disabled</label>
+          <input class="form-input form-input--disabled" value="Cannot edit" disabled />
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">Role</label>
+          <select class="form-select">
+            <option>Admin</option>
+            <option>Editor</option>
+            <option>Viewer</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">Bio</label>
+          <textarea class="form-textarea">Product designer based in Melbourne.</textarea>
+        </div>
+
+        <div class="form-group">
+          <label class="form-checkbox"><input type="checkbox" checked /> Receive email notifications</label>
+        </div>
+
+        <div class="form-group">
+          <label class="form-radio"><input type="radio" name="plan" checked /> Monthly billing</label>
+          <label class="form-radio"><input type="radio" name="plan" /> Annual billing</label>
+        </div>
+
+        <div class="form-group">
+          <div class="gallery-inline-row">
+            <span class="form-toggle"></span>
+            <span class="text-sm">Enable dark mode</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="gallery-divider"></div>
+
+  <!-- Table -->
+  <section class="gallery-section">
+    <h2>Table</h2>
+    <p>table.css — Data tables with toolbar, striped and compact variants</p>
+
+    <div style="max-width: 700px;">
+      <div class="table-wrap">
+        <div class="table-toolbar">
+          <span style="font-weight: 500;">Team members</span>
+          <button class="btn btn--ghost btn--sm">Export</button>
+        </div>
+        <table class="table">
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>Role</th>
+              <th>Status</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Sarah Connor</td>
+              <td>Designer</td>
+              <td><span class="badge badge--success">Active</span></td>
+            </tr>
+            <tr>
+              <td>James Wilson</td>
+              <td>Developer</td>
+              <td><span class="badge badge--success">Active</span></td>
+            </tr>
+            <tr>
+              <td>Emily Chen</td>
+              <td>PM</td>
+              <td><span class="badge badge--warning">Away</span></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div style="max-width: 700px; margin-top: 20px;">
+      <div class="gallery-item">
+        <div class="table-wrap">
+          <table class="table table--compact table--striped">
+            <thead>
+              <tr><th>ID</th><th>Event</th><th>Date</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>1024</td><td>Deploy</td><td>Mar 28</td></tr>
+              <tr><td>1025</td><td>Rollback</td><td>Mar 29</td></tr>
+              <tr><td>1026</td><td>Deploy</td><td>Mar 30</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <span class="gallery-label">.table--compact.table--striped</span>
+      </div>
+    </div>
+  </section>
+
+  <div class="gallery-divider"></div>
+
+  <!-- Tabs -->
+  <section class="gallery-section">
+    <h2>Tabs</h2>
+    <p>tabs.css — Tab bar with active state and panel</p>
+
+    <div style="max-width: 500px;">
+      <div class="tabs">
+        <span class="tab tab--active">General</span>
+        <span class="tab">Security</span>
+        <span class="tab">Notifications</span>
+        <span class="tab">Billing</span>
+      </div>
+      <div class="tab-panel">
+        <p class="text-muted">Tab panel content goes here. Only the active panel is visible.</p>
+      </div>
+    </div>
+  </section>
+
+  <div class="gallery-divider"></div>
+
+  <!-- Modal -->
+  <section class="gallery-section">
+    <h2>Modal</h2>
+    <p>modal.css — Dialog boxes in sm, default, and lg sizes (rendered inline here)</p>
+
+    <div class="gallery-row" style="gap: 24px; align-items: flex-start;">
+      <div class="gallery-item">
+        <div class="modal modal--sm" style="position: static;">
+          <div class="modal__title">Delete item?</div>
+          <div class="modal__body">This action cannot be undone. Are you sure you want to delete this item?</div>
+          <div class="modal__footer">
+            <button class="btn btn--secondary btn--sm">Cancel</button>
+            <button class="btn btn--danger btn--sm">Delete</button>
+          </div>
+        </div>
+        <span class="gallery-label">.modal--sm</span>
+      </div>
+
+      <div class="gallery-item">
+        <div class="modal" style="position: static;">
+          <div class="modal__title">Invite team member</div>
+          <div class="modal__body">
+            <div class="form-group">
+              <label class="form-label">Email address</label>
+              <input class="form-input" placeholder="name@company.com" />
+            </div>
+          </div>
+          <div class="modal__footer">
+            <button class="btn btn--secondary btn--sm">Cancel</button>
+            <button class="btn btn--primary btn--sm">Send invite</button>
+          </div>
+        </div>
+        <span class="gallery-label">.modal (default)</span>
+      </div>
+    </div>
+  </section>
+
+  <div class="gallery-divider"></div>
+
+  <!-- Top Nav -->
+  <section class="gallery-section">
+    <h2>Top Nav</h2>
+    <p>top-nav.css — Application header with logo, links, and avatar</p>
+
+    <div class="gallery-preview" style="padding: 0;">
+      <nav class="top-nav">
+        <div class="top-nav__logo"></div>
+        <div class="top-nav__links">
+          <span class="top-nav__link top-nav__link--active">Dashboard</span>
+          <span class="top-nav__link">Projects</span>
+          <span class="top-nav__link">Team</span>
+          <span class="top-nav__link">Settings</span>
+        </div>
+        <div class="top-nav__right">
+          <div class="top-nav__avatar"></div>
+        </div>
+      </nav>
+    </div>
+  </section>
+
+  <div class="gallery-divider"></div>
+
+  <!-- Sidebar -->
+  <section class="gallery-section">
+    <h2>Sidebar</h2>
+    <p>sidebar.css — Vertical navigation panel with sections, items, and narrow variant</p>
+
+    <div class="gallery-row" style="gap: 24px;">
+      <div class="gallery-item">
+        <div class="sidebar" style="height: 300px; border: 1px solid var(--color-border); border-radius: var(--radius-md);">
+          <div class="sidebar__section-label">Main</div>
+          <div class="sidebar__item sidebar__item--active">
+            <div class="sidebar__icon"></div>
+            Dashboard
+          </div>
+          <div class="sidebar__item">
+            <div class="sidebar__icon"></div>
+            Analytics
+          </div>
+          <div class="sidebar__item">
+            <div class="sidebar__icon"></div>
+            Reports
+          </div>
+          <div class="sidebar__divider"></div>
+          <div class="sidebar__section-label">Settings</div>
+          <div class="sidebar__item">
+            <div class="sidebar__icon"></div>
+            Profile
+          </div>
+          <div class="sidebar__item">
+            <div class="sidebar__icon"></div>
+            Billing
+          </div>
+        </div>
+        <span class="gallery-label">.sidebar (default 220px)</span>
+      </div>
+      <div class="gallery-item">
+        <div class="sidebar sidebar--narrow" style="height: 300px; border: 1px solid var(--color-border); border-radius: var(--radius-md); align-items: center;">
+          <div class="sidebar__icon" style="margin-top: var(--space-sm);"></div>
+          <div class="sidebar__icon"></div>
+          <div class="sidebar__icon"></div>
+          <div class="sidebar__divider"></div>
+          <div class="sidebar__icon"></div>
+        </div>
+        <span class="gallery-label">.sidebar--narrow</span>
+      </div>
+    </div>
+  </section>
+
+  <div class="gallery-divider"></div>
+
+  <!-- Layout -->
+  <section class="gallery-section">
+    <h2>Layout</h2>
+    <p>layout.css — Page structure: .page, .page-body, .main-content</p>
+
+    <div class="gallery-row">
+      <div class="gallery-item">
+        <div class="page-header" style="width: 400px;">
+          <div>
+            <div class="page-title">Page title</div>
+            <div class="page-subtitle">Supporting description text</div>
+          </div>
+          <div class="btn-group">
+            <button class="btn btn--secondary btn--sm">Cancel</button>
+            <button class="btn btn--primary btn--sm">Save</button>
+          </div>
+        </div>
+        <span class="gallery-label">.page-header + .page-title + .page-subtitle</span>
+      </div>
+    </div>
+  </section>
+
+  <div class="gallery-divider"></div>
+
+  <!-- Utility -->
+  <section class="gallery-section">
+    <h2>Utility classes</h2>
+    <p>utility.css — Avatars, empty states, helpers</p>
+
+    <div class="gallery-row" style="gap: 16px;">
+      <div class="gallery-item">
+        <div class="avatar avatar--sm"></div>
+        <span class="gallery-label">.avatar--sm (24px)</span>
+      </div>
+      <div class="gallery-item">
+        <div class="avatar avatar--md"></div>
+        <span class="gallery-label">.avatar--md (36px)</span>
+      </div>
+      <div class="gallery-item">
+        <div class="avatar avatar--lg"></div>
+        <span class="gallery-label">.avatar--lg (52px)</span>
+      </div>
+    </div>
+
+    <div style="max-width: 400px; margin-top: 20px;">
+      <div class="gallery-item">
+        <div class="empty-state" style="border: 1px dashed var(--color-border); border-radius: var(--radius-lg);">
+          <div style="font-size: 24px;">📭</div>
+          <div>No results found</div>
+          <div class="text-sm">Try adjusting your search or filters.</div>
+        </div>
+        <span class="gallery-label">.empty-state</span>
+      </div>
+    </div>
+  </section>
+
+</body>
+</html>

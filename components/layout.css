@@ -1,0 +1,22 @@
+.page {
+  display: flex;
+  flex-direction: column;
+  height: 720px;
+  overflow: hidden;
+  position: relative;
+}
+
+.page-body {
+  display: flex;
+  flex: 1;
+  overflow: hidden;
+}
+
+.main-content {
+  flex: 1;
+  padding: var(--space-lg);
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-lg);
+}
