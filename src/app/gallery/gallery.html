@@ -1,0 +1,285 @@
+<h1>Component Gallery</h1>
+<p class="subtitle">Angular Material components available for wireframe screens.</p>
+
+<!-- Buttons -->
+<section>
+  <h2>Buttons</h2>
+  <p>MatButtonModule — button variants</p>
+  <div class="row">
+    <div class="item">
+      <button mat-flat-button color="primary">Flat Primary</button>
+      <span class="label">mat-flat-button</span>
+    </div>
+    <div class="item">
+      <button mat-raised-button color="primary">Raised</button>
+      <span class="label">mat-raised-button</span>
+    </div>
+    <div class="item">
+      <button mat-stroked-button>Stroked</button>
+      <span class="label">mat-stroked-button</span>
+    </div>
+    <div class="item">
+      <button mat-button>Basic</button>
+      <span class="label">mat-button</span>
+    </div>
+    <div class="item">
+      <button mat-icon-button><mat-icon>favorite</mat-icon></button>
+      <span class="label">mat-icon-button</span>
+    </div>
+    <div class="item">
+      <button mat-fab><mat-icon>add</mat-icon></button>
+      <span class="label">mat-fab</span>
+    </div>
+    <div class="item">
+      <button mat-mini-fab><mat-icon>edit</mat-icon></button>
+      <span class="label">mat-mini-fab</span>
+    </div>
+  </div>
+  <div class="row">
+    <div class="item">
+      <button mat-flat-button color="accent">Accent</button>
+      <span class="label">color="accent"</span>
+    </div>
+    <div class="item">
+      <button mat-flat-button color="warn">Warn</button>
+      <span class="label">color="warn"</span>
+    </div>
+    <div class="item">
+      <button mat-flat-button disabled>Disabled</button>
+      <span class="label">disabled</span>
+    </div>
+  </div>
+</section>
+
+<mat-divider></mat-divider>
+
+<!-- Cards -->
+<section>
+  <h2>Cards</h2>
+  <p>MatCardModule — content containers</p>
+  <div class="row" style="gap: 16px;">
+    <div class="item" style="width: 240px;">
+      <mat-card>
+        <mat-card-header>
+          <mat-card-title>Basic card</mat-card-title>
+          <mat-card-subtitle>With subtitle</mat-card-subtitle>
+        </mat-card-header>
+        <mat-card-content>
+          <p>Card content goes here.</p>
+        </mat-card-content>
+        <mat-card-actions>
+          <button mat-button>Action</button>
+        </mat-card-actions>
+      </mat-card>
+      <span class="label">mat-card</span>
+    </div>
+    <div class="item" style="width: 200px;">
+      <mat-card>
+        <mat-card-content>
+          <div style="font-size: 12px; color: #888;">Total users</div>
+          <div style="font-size: 28px; font-weight: 600; margin: 8px 0 4px;">12,847</div>
+          <div style="font-size: 12px; color: #888;">+3.2% from last month</div>
+        </mat-card-content>
+      </mat-card>
+      <span class="label">stat card pattern</span>
+    </div>
+  </div>
+</section>
+
+<mat-divider></mat-divider>
+
+<!-- Forms -->
+<section>
+  <h2>Form fields</h2>
+  <p>MatFormFieldModule, MatInputModule, MatSelectModule, MatCheckboxModule, MatRadioModule, MatSlideToggleModule</p>
+  <div class="preview" style="max-width: 500px; display: flex; flex-direction: column; gap: 16px;">
+    <mat-form-field appearance="outline" style="width: 100%;">
+      <mat-label>Full name</mat-label>
+      <input matInput value="Sarah Connor" />
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" style="width: 100%;">
+      <mat-label>Email</mat-label>
+      <input matInput value="sarah&#64;example.com" />
+      <mat-hint>We'll never share your email.</mat-hint>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" style="width: 100%;">
+      <mat-label>Role</mat-label>
+      <mat-select value="admin">
+        <mat-option value="admin">Admin</mat-option>
+        <mat-option value="editor">Editor</mat-option>
+        <mat-option value="viewer">Viewer</mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" style="width: 100%;">
+      <mat-label>Bio</mat-label>
+      <textarea matInput rows="3">Product designer based in Melbourne.</textarea>
+    </mat-form-field>
+
+    <mat-checkbox checked>Receive email notifications</mat-checkbox>
+
+    <div>
+      <mat-radio-group value="monthly">
+        <mat-radio-button value="monthly" style="margin-right: 16px;">Monthly billing</mat-radio-button>
+        <mat-radio-button value="annual">Annual billing</mat-radio-button>
+      </mat-radio-group>
+    </div>
+
+    <mat-slide-toggle>Enable dark mode</mat-slide-toggle>
+  </div>
+</section>
+
+<mat-divider></mat-divider>
+
+<!-- Table -->
+<section>
+  <h2>Table</h2>
+  <p>MatTableModule — data tables</p>
+  <div class="preview" style="max-width: 600px;">
+    <table mat-table [dataSource]="[
+      { name: 'Sarah Connor', role: 'Designer', status: 'Active' },
+      { name: 'James Wilson', role: 'Developer', status: 'Active' },
+      { name: 'Emily Chen', role: 'PM', status: 'Away' }
+    ]" style="width: 100%;">
+      <ng-container matColumnDef="name">
+        <th mat-header-cell *matHeaderCellDef>Name</th>
+        <td mat-cell *matCellDef="let row">{{ row.name }}</td>
+      </ng-container>
+      <ng-container matColumnDef="role">
+        <th mat-header-cell *matHeaderCellDef>Role</th>
+        <td mat-cell *matCellDef="let row">{{ row.role }}</td>
+      </ng-container>
+      <ng-container matColumnDef="status">
+        <th mat-header-cell *matHeaderCellDef>Status</th>
+        <td mat-cell *matCellDef="let row">{{ row.status }}</td>
+      </ng-container>
+      <tr mat-header-row *matHeaderRowDef="['name', 'role', 'status']"></tr>
+      <tr mat-row *matRowDef="let row; columns: ['name', 'role', 'status']"></tr>
+    </table>
+  </div>
+</section>
+
+<mat-divider></mat-divider>
+
+<!-- Chips & Badges -->
+<section>
+  <h2>Chips &amp; Badges</h2>
+  <p>MatChipsModule, MatBadgeModule</p>
+  <div class="row">
+    <div class="item">
+      <mat-chip-set>
+        <mat-chip>Default</mat-chip>
+        <mat-chip highlighted>Highlighted</mat-chip>
+        <mat-chip disabled>Disabled</mat-chip>
+      </mat-chip-set>
+      <span class="label">mat-chip-set</span>
+    </div>
+    <div class="item">
+      <button mat-icon-button matBadge="5" matBadgeColor="warn">
+        <mat-icon>notifications</mat-icon>
+      </button>
+      <span class="label">matBadge</span>
+    </div>
+  </div>
+</section>
+
+<mat-divider></mat-divider>
+
+<!-- Tabs -->
+<section>
+  <h2>Tabs</h2>
+  <p>MatTabsModule</p>
+  <mat-tab-group style="max-width: 500px;">
+    <mat-tab label="General">
+      <div style="padding: 16px;">General settings content.</div>
+    </mat-tab>
+    <mat-tab label="Security">
+      <div style="padding: 16px;">Security settings content.</div>
+    </mat-tab>
+    <mat-tab label="Notifications">
+      <div style="padding: 16px;">Notification preferences.</div>
+    </mat-tab>
+  </mat-tab-group>
+</section>
+
+<mat-divider></mat-divider>
+
+<!-- Toolbar -->
+<section>
+  <h2>Toolbar</h2>
+  <p>MatToolbarModule</p>
+  <mat-toolbar color="primary" style="max-width: 600px;">
+    <span>App Name</span>
+    <span style="flex: 1;"></span>
+    <button mat-button>Link</button>
+    <button mat-icon-button><mat-icon>account_circle</mat-icon></button>
+  </mat-toolbar>
+</section>
+
+<mat-divider></mat-divider>
+
+<!-- Lists -->
+<section>
+  <h2>Navigation list</h2>
+  <p>MatListModule</p>
+  <div class="preview" style="max-width: 240px; padding: 0;">
+    <mat-nav-list>
+      <mat-list-item [activated]="true">
+        <mat-icon matListItemIcon>dashboard</mat-icon>
+        <span matListItemTitle>Dashboard</span>
+      </mat-list-item>
+      <mat-list-item>
+        <mat-icon matListItemIcon>people</mat-icon>
+        <span matListItemTitle>Users</span>
+      </mat-list-item>
+      <mat-list-item>
+        <mat-icon matListItemIcon>settings</mat-icon>
+        <span matListItemTitle>Settings</span>
+      </mat-list-item>
+    </mat-nav-list>
+  </div>
+</section>
+
+<mat-divider></mat-divider>
+
+<!-- Progress -->
+<section>
+  <h2>Progress indicators</h2>
+  <p>MatProgressBarModule, MatProgressSpinnerModule</p>
+  <div style="display: flex; flex-direction: column; gap: 16px; max-width: 400px;">
+    <div class="item">
+      <mat-progress-bar mode="determinate" value="65"></mat-progress-bar>
+      <span class="label">mat-progress-bar (65%)</span>
+    </div>
+    <div class="row">
+      <div class="item">
+        <mat-spinner diameter="40"></mat-spinner>
+        <span class="label">mat-spinner</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<mat-divider></mat-divider>
+
+<!-- Expansion -->
+<section>
+  <h2>Expansion panel</h2>
+  <p>MatExpansionModule</p>
+  <mat-accordion style="max-width: 500px;">
+    <mat-expansion-panel>
+      <mat-expansion-panel-header>
+        <mat-panel-title>Personal data</mat-panel-title>
+      </mat-expansion-panel-header>
+      <p>Name, email, and phone number fields would go here.</p>
+    </mat-expansion-panel>
+    <mat-expansion-panel>
+      <mat-expansion-panel-header>
+        <mat-panel-title>Preferences</mat-panel-title>
+      </mat-expansion-panel-header>
+      <p>Theme, language, and notification settings.</p>
+    </mat-expansion-panel>
+  </mat-accordion>
+</section>

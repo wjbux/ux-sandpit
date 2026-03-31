@@ -1,0 +1,45 @@
+<div class="toolbar">
+  <div class="toolbar__title">Wireframe canvas</div>
+  <div class="toolbar__count">{{ totalScreens }} screen{{ totalScreens === 1 ? '' : 's' }}</div>
+  <div class="toolbar__zoom">
+    <button (click)="zoomOut()">&minus;</button>
+    <span class="toolbar__zoom-level">{{ zoomLabel() }}</span>
+    <button (click)="zoomIn()">+</button>
+  </div>
+</div>
+
+<div class="canvas">
+  @for (group of groups; track group.name) {
+    <div class="group">
+      <div class="group__header" (click)="toggleGroup(group)">
+        <span class="group__arrow" [class.group__arrow--collapsed]="group.collapsed">&#9660;</span>
+        <span class="group__name">{{ group.label }}</span>
+        <span class="group__count">{{ group.screens.length }} screen{{ group.screens.length === 1 ? '' : 's' }}</span>
+      </div>
+      @if (!group.collapsed) {
+        <div class="group__screens">
+          @for (screen of group.screens; track screen.path) {
+            <div class="frame-wrapper" (click)="openFullscreen(screen)">
+              <div class="frame-container" [style.width]="frameWidth()" [style.height]="frameHeight()">
+                <iframe [src]="screenUrl(screen)" [style.transform]="frameScale()"></iframe>
+              </div>
+              <div class="frame-label">{{ screen.label }}</div>
+            </div>
+          }
+        </div>
+      }
+    </div>
+  }
+</div>
+
+@if (fullscreen(); as screen) {
+  <div class="fullscreen-overlay" (click)="closeFullscreen()">
+    <div class="fullscreen-bar" (click)="$event.stopPropagation()">
+      <span class="fullscreen-bar__label">{{ screen.label }}</span>
+      <button class="fullscreen-bar__close" (click)="closeFullscreen()">&times;</button>
+    </div>
+    <div class="fullscreen-body" (click)="closeFullscreen()">
+      <iframe [src]="screenUrl(screen)" (click)="$event.stopPropagation()"></iframe>
+    </div>
+  </div>
+}

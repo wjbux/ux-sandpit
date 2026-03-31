@@ -1,0 +1,118 @@
+<div class="screen">
+  <mat-toolbar color="primary">
+    <span>Acme Corp</span>
+    <span style="flex: 1"></span>
+    <button mat-button>Dashboard</button>
+    <button mat-button>Users</button>
+    <button mat-button>Analytics</button>
+    <button mat-icon-button><mat-icon>account_circle</mat-icon></button>
+  </mat-toolbar>
+
+  <div style="display: flex; flex: 1; overflow: hidden;">
+    <mat-nav-list style="width: 220px; border-right: 1px solid #e0e0e0;">
+      <mat-list-item [activated]="true">
+        <mat-icon matListItemIcon>dashboard</mat-icon>
+        <span matListItemTitle>Overview</span>
+      </mat-list-item>
+      <mat-list-item>
+        <mat-icon matListItemIcon>bar_chart</mat-icon>
+        <span matListItemTitle>Reports</span>
+      </mat-list-item>
+      <mat-list-item>
+        <mat-icon matListItemIcon>timeline</mat-icon>
+        <span matListItemTitle>Activity</span>
+      </mat-list-item>
+      <mat-divider></mat-divider>
+      <mat-list-item>
+        <mat-icon matListItemIcon>group</mat-icon>
+        <span matListItemTitle>Team</span>
+      </mat-list-item>
+      <mat-list-item>
+        <mat-icon matListItemIcon>payments</mat-icon>
+        <span matListItemTitle>Billing</span>
+      </mat-list-item>
+    </mat-nav-list>
+
+    <div style="flex: 1; padding: 24px; overflow-y: auto; display: flex; flex-direction: column; gap: 24px;">
+      <div style="display: flex; align-items: center; justify-content: space-between;">
+        <div>
+          <h2 style="margin: 0; font-size: 20px; font-weight: 600;">Dashboard</h2>
+          <p style="margin: 2px 0 0; font-size: 12px; color: #888;">Welcome back, Sarah</p>
+        </div>
+        <div style="display: flex; gap: 8px;">
+          <button mat-stroked-button>Export</button>
+          <button mat-flat-button color="primary">Add widget</button>
+        </div>
+      </div>
+
+      <div class="stat-grid">
+        <mat-card>
+          <mat-card-content>
+            <div style="font-size: 12px; color: #888;">Total users</div>
+            <div class="stat-value">12,847</div>
+            <div class="stat-meta">+3.2% from last month</div>
+          </mat-card-content>
+        </mat-card>
+        <mat-card>
+          <mat-card-content>
+            <div style="font-size: 12px; color: #888;">Revenue</div>
+            <div class="stat-value">$48,290</div>
+            <div class="stat-meta">+12.5% from last month</div>
+          </mat-card-content>
+        </mat-card>
+        <mat-card>
+          <mat-card-content>
+            <div style="font-size: 12px; color: #888;">Active sessions</div>
+            <div class="stat-value">1,429</div>
+            <div class="stat-meta">-2.1% from last hour</div>
+          </mat-card-content>
+        </mat-card>
+        <mat-card>
+          <mat-card-content>
+            <div style="font-size: 12px; color: #888;">Conversion rate</div>
+            <div class="stat-value">3.6%</div>
+            <div class="stat-meta">+0.4% from last week</div>
+          </mat-card-content>
+        </mat-card>
+      </div>
+
+      <mat-card>
+        <mat-card-header>
+          <mat-card-title style="font-size: 14px;">Recent activity</mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+          <table mat-table [dataSource]="[
+            { user: 'James Wilson', action: 'Created new project', date: 'Mar 28, 2026', status: 'Completed' },
+            { user: 'Emily Chen', action: 'Updated billing info', date: 'Mar 27, 2026', status: 'In progress' },
+            { user: 'Michael Torres', action: 'Invited team member', date: 'Mar 27, 2026', status: 'Completed' },
+            { user: 'Olivia Patel', action: 'Submitted support ticket', date: 'Mar 26, 2026', status: 'Pending' },
+            { user: 'Daniel Kim', action: 'Cancelled subscription', date: 'Mar 25, 2026', status: 'Cancelled' }
+          ]" style="width: 100%;">
+            <ng-container matColumnDef="user">
+              <th mat-header-cell *matHeaderCellDef>User</th>
+              <td mat-cell *matCellDef="let row">{{ row.user }}</td>
+            </ng-container>
+            <ng-container matColumnDef="action">
+              <th mat-header-cell *matHeaderCellDef>Action</th>
+              <td mat-cell *matCellDef="let row">{{ row.action }}</td>
+            </ng-container>
+            <ng-container matColumnDef="date">
+              <th mat-header-cell *matHeaderCellDef>Date</th>
+              <td mat-cell *matCellDef="let row">{{ row.date }}</td>
+            </ng-container>
+            <ng-container matColumnDef="status">
+              <th mat-header-cell *matHeaderCellDef>Status</th>
+              <td mat-cell *matCellDef="let row">
+                <span [style.color]="row.status === 'Completed' ? '#2d7a3a' : row.status === 'Cancelled' ? '#c53030' : '#9a6200'">
+                  {{ row.status }}
+                </span>
+              </td>
+            </ng-container>
+            <tr mat-header-row *matHeaderRowDef="['user', 'action', 'date', 'status']"></tr>
+            <tr mat-row *matRowDef="let row; columns: ['user', 'action', 'date', 'status']"></tr>
+          </table>
+        </mat-card-content>
+      </mat-card>
+    </div>
+  </div>
+</div>

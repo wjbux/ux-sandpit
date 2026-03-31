@@ -1,8 +1,8 @@
 # UX Wireframe Sandpit
 
-A local wireframe prototyping tool for UX teams. Describe screens in plain English via GitHub Copilot CLI — a browser canvas displays the results as frames, similar to Figma's canvas.
+A local wireframe prototyping tool for UX teams. Describe screens in plain English via GitHub Copilot CLI — a browser canvas displays the results using real Angular Material components.
 
-**Stack:** Vite (dev server), vanilla HTML/CSS, no frontend framework.
+**Stack:** Angular 21, Angular Material, Angular CDK
 
 ## One-time setup
 
@@ -17,7 +17,7 @@ chmod +x scripts/guard.sh
 npm start
 ```
 
-Opens at `http://localhost:5173`. Keep the terminal running while you work.
+Opens at `http://localhost:4200`. Keep the terminal running while you work.
 
 ## Starting Copilot
 
@@ -29,44 +29,44 @@ copilot
 
 ## Screen grouping
 
-Screens in `/screens/` appear as "Ungrouped" on the canvas. To group related screens, put them in a subdirectory:
+Screens in `src/app/screens/` appear as "Ungrouped" on the canvas. Group related screens in subdirectories:
 
 ```
-screens/
-  example.html              ← ungrouped
+src/app/screens/
+  example/            ← ungrouped
   users/
-    list.html               ← "Users" group
-    profile.html
+    list/             ← "Users" group
+    profile/
   settings/
-    general.html            ← "Settings" group
-    security.html
+    general/          ← "Settings" group
+    security/
 ```
 
-Groups are collapsible on the canvas. Click any screen to view it fullscreen (press Escape or click outside to close).
+Click any screen on the canvas to view it fullscreen (Escape to close).
 
 ## Example prompts
 
 - "Create a login screen with email, password, and a forgot password link"
-- "Add a users list screen and a users profile screen" *(creates screens/users/list.html and profile.html)*
-- "Create an analytics screen with 4 stat cards and a large empty chart area"
+- "Add a users list screen and a users profile screen"
+- "Create an analytics screen with 4 stat cards and a chart placeholder"
 - "Add a settings group with general, notifications, and security screens"
 - "Update the dashboard to show 6 stat cards instead of 4"
-- "Add a delete confirmation modal to the users list screen"
-- "Create an onboarding group with a welcome screen and a setup screen"
+- "Add a delete confirmation dialog to the users list screen"
+- "Create an onboarding group with welcome and setup screens"
 - "Add a notifications panel as a narrow right sidebar on the dashboard"
 
 ## Viewing the component gallery
 
-Navigate to `http://localhost:5173/gallery.html`
+Navigate to `http://localhost:4200/gallery`
 
-## Adding new components
+## Applying your theme
 
-Tell Copilot: "Add a [component name] component with [variant] and [variant] variants"
+1. Remove `@angular/material/prebuilt-themes/azure-blue.css` from `angular.json` styles
+2. Add your custom theme to `src/styles.scss` (placeholder instructions are in the file)
 
 ## Useful Copilot CLI commands
 
-- `/plan` — ask Copilot to outline its approach before making changes
+- `/plan` — outline approach before making changes
 - `/diff` — review changes before accepting
 - `/clear` — start a fresh conversation
-- `/skills` — see available skills in this project
-- `/model` — switch AI model (default is fine; use Claude Sonnet for complex layouts)
+- `/skills` — see available skills

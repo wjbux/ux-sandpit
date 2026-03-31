@@ -1,5 +1,5 @@
 ---
-description: Create a new wireframe screen in the sandpit project
+description: Create a new wireframe screen using Angular Material components
 triggers:
   - create a screen
   - add a screen
@@ -9,46 +9,52 @@ triggers:
 
 # Create Screen
 
-Creates a new static HTML wireframe screen using the project's component library.
+Creates a new Angular Material wireframe screen component.
 
 ## Steps
 
-1. **Confirm the screen name.** If the user didn't provide one, ask. Derive the filename as lowercase-hyphenated (e.g. "User Profile" → `user-profile.html`).
+1. **Confirm the screen name.** If not provided, ask. Derive the folder/file name as lowercase-hyphenated (e.g. "User Profile" → `user-profile`).
 
-2. **Decide on grouping.** If the screen belongs to a feature area (e.g. "users", "settings", "onboarding"), place it in `/screens/[group]/[name].html`. Create the subdirectory if it doesn't exist. If ungrouped, place in `/screens/[name].html`. The canvas groups subdirectories automatically.
+2. **Decide on grouping.** If the screen belongs to a feature area (e.g. "users", "settings"), place it in `src/app/screens/[group]/[name]/`. Create the subdirectory if needed. If ungrouped, place in `src/app/screens/[name]/`.
 
-3. **Check for conflicts.** Read the target directory to ensure the filename does not already exist. If it does, ask the user whether to overwrite or choose a different name.
+3. **Check for conflicts.** Ensure the folder does not already exist.
 
-4. **Create the file.** Use the standard template. **Important:** adjust the CSS link path based on depth:
-   - Root screens: `href="../components/index.css"`
-   - Grouped screens (in subdirectory): `href="../../components/index.css"`
+4. **Create the component file** (`[name].ts`):
+   ```typescript
+   import { Component } from '@angular/core';
+   import { SCREEN_IMPORTS } from '../screen-imports'; // or ../../screen-imports for grouped
 
-   ```html
-   <!DOCTYPE html>
-   <html lang="en">
-   <head>
-     <meta charset="UTF-8" />
-     <link rel="stylesheet" href="../components/index.css" />
-     <style>/* screen-specific layout only */</style>
-   </head>
-   <body>
-   <div class="page">
-     <!-- content here -->
-   </div>
-   </body>
-   </html>
+   @Component({
+     selector: 'screen-[name]',
+     imports: [...SCREEN_IMPORTS],
+     templateUrl: './[name].html',
+     styles: `/* screen-specific layout only */`,
+   })
+   export default class [Name]Screen {}
    ```
 
-5. **Build the layout.** Use only classes from `components/`. Use the user's description to decide which components to include. Reference `screens/example.html` for structural patterns.
+5. **Create the template file** (`[name].html`):
+   - Wrap everything in `<div class="screen">`
+   - Use Angular Material components only (see copilot-instructions.md for the full list)
+   - Use `@if` / `@for` control flow, never `*ngIf` / `*ngFor`
+   - Use realistic placeholder content
+   - Reference `src/app/screens/example/example.html` for patterns
 
-6. **Do not edit `index.html`** — the canvas auto-discovers screens via `/api/screens`.
+6. **Add a route** to `src/app/app.routes.ts`:
+   ```typescript
+   { path: 'screen/[path]', loadComponent: () => import('./screens/[path]/[name]') },
+   ```
 
-7. **Confirm completion** with the filename, group (if any), and a brief description of what was built.
+7. **Add a registry entry** to `src/app/screens/screen-registry.ts`:
+   ```typescript
+   { path: '[path]', label: '[Label]', group: '[Group]' | null },
+   ```
+
+8. **Confirm completion** with the file path, route, and a brief description.
 
 ## Notes
 
-- If the user says "like the example screen but with X" — read `screens/example.html` first, then adapt.
-- If the user asks for a modal or overlay, add `style="position: relative"` to the `.page` div.
-- Always use realistic content in placeholders — real-looking names, numbers, labels. Never use "Lorem ipsum".
-- Never write JavaScript in screen files.
-- Never use inline `style=""` attributes — use component classes or the screen `<style>` block.
+- For modals/dialogs, render the dialog content inline in the template (no MatDialog service)
+- For static table data, define the array inline in the template's `[dataSource]`
+- Always use `default export` on screen components
+- Visit `/gallery` for a visual reference of available Material components

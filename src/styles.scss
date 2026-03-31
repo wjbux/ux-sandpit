@@ -1,0 +1,42 @@
+/*
+ * THEME PLACEHOLDER
+ *
+ * Replace the prebuilt theme in angular.json with your custom theme.
+ * To use a custom theme:
+ *
+ * 1. Remove "@angular/material/prebuilt-themes/azure-blue.css" from angular.json styles
+ * 2. Uncomment and customise the theme below:
+ *
+ * @use '@angular/material' as mat;
+ *
+ * $theme: mat.define-theme((
+ *   color: (
+ *     theme-type: light,
+ *     primary: mat.$violet-palette,
+ *     tertiary: mat.$green-palette,
+ *   ),
+ *   typography: (
+ *     brand-family: 'Roboto',
+ *     plain-family: 'Roboto',
+ *   ),
+ * ));
+ *
+ * html {
+ *   @include mat.all-component-themes($theme);
+ * }
+ */
+
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+
+/* Screen wrapper — used by all wireframe screens */
+.screen {
+  width: 1280px;
+  height: 720px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  background: #fff;
+}
