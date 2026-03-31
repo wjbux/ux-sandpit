@@ -1,4 +1,5 @@
-import { Component, signal, computed } from '@angular/core';
+import { Component, signal, computed, inject } from '@angular/core';
+import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 import { SCREENS, ScreenEntry } from '../screens/screen-registry';
 
 interface ScreenGroup {
@@ -48,6 +49,7 @@ interface ScreenGroup {
   `,
 })
 export default class CanvasComponent {
+  private readonly sanitizer = inject(DomSanitizer);
   private readonly zoomSteps = [0.10, 0.15, 0.20, 0.25, 0.33, 0.50, 0.75, 1.00];
   protected readonly zoomIndex = signal(3);
   protected readonly scale = computed(() => this.zoomSteps[this.zoomIndex()]);
@@ -58,6 +60,7 @@ export default class CanvasComponent {
 
   protected readonly totalScreens = SCREENS.length;
   protected readonly groups: ScreenGroup[];
+  private readonly urlCache = new Map<string, SafeResourceUrl>();
 
   protected readonly fullscreen = signal<ScreenEntry | null>(null);
 
@@ -101,7 +104,11 @@ export default class CanvasComponent {
     this.fullscreen.set(null);
   }
 
-  protected screenUrl(screen: ScreenEntry): string {
-    return '/screen/' + screen.path;
+  protected screenUrl(screen: ScreenEntry): SafeResourceUrl {
+    const key = screen.path;
+    if (!this.urlCache.has(key)) {
+      this.urlCache.set(key, this.sanitizer.bypassSecurityTrustResourceUrl('/screen/' + key));
+    }
+    return this.urlCache.get(key)!;
   }
 }
