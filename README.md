@@ -27,15 +27,32 @@ In a second terminal:
 copilot
 ```
 
+## Screen grouping
+
+Screens in `/screens/` appear as "Ungrouped" on the canvas. To group related screens, put them in a subdirectory:
+
+```
+screens/
+  example.html              ← ungrouped
+  users/
+    list.html               ← "Users" group
+    profile.html
+  settings/
+    general.html            ← "Settings" group
+    security.html
+```
+
+Groups are collapsible on the canvas. Click any screen to view it fullscreen (press Escape or click outside to close).
+
 ## Example prompts
 
 - "Create a login screen with email, password, and a forgot password link"
-- "Add a user management screen with a table of users, status badges, and an invite button"
+- "Add a users list screen and a users profile screen" *(creates screens/users/list.html and profile.html)*
 - "Create an analytics screen with 4 stat cards and a large empty chart area"
-- "Add a settings screen with sidebar navigation and form sections for profile, notifications, and security"
+- "Add a settings group with general, notifications, and security screens"
 - "Update the dashboard to show 6 stat cards instead of 4"
-- "Add a delete confirmation modal to the users screen"
-- "Create an onboarding screen with a 3-step progress indicator"
+- "Add a delete confirmation modal to the users list screen"
+- "Create an onboarding group with a welcome screen and a setup screen"
 - "Add a notifications panel as a narrow right sidebar on the dashboard"
 
 ## Viewing the component gallery

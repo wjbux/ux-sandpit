@@ -15,9 +15,14 @@ Creates a new static HTML wireframe screen using the project's component library
 
 1. **Confirm the screen name.** If the user didn't provide one, ask. Derive the filename as lowercase-hyphenated (e.g. "User Profile" → `user-profile.html`).
 
-2. **Check for conflicts.** Read `/screens/` to ensure the filename does not already exist. If it does, ask the user whether to overwrite or choose a different name.
+2. **Decide on grouping.** If the screen belongs to a feature area (e.g. "users", "settings", "onboarding"), place it in `/screens/[group]/[name].html`. Create the subdirectory if it doesn't exist. If ungrouped, place in `/screens/[name].html`. The canvas groups subdirectories automatically.
 
-3. **Create the file.** Create `/screens/[name].html` using the standard template:
+3. **Check for conflicts.** Read the target directory to ensure the filename does not already exist. If it does, ask the user whether to overwrite or choose a different name.
+
+4. **Create the file.** Use the standard template. **Important:** adjust the CSS link path based on depth:
+   - Root screens: `href="../components/index.css"`
+   - Grouped screens (in subdirectory): `href="../../components/index.css"`
+
    ```html
    <!DOCTYPE html>
    <html lang="en">
@@ -34,11 +39,11 @@ Creates a new static HTML wireframe screen using the project's component library
    </html>
    ```
 
-4. **Build the layout.** Use only classes from `components/`. Use the user's description to decide which components to include. Reference `screens/example.html` for structural patterns.
+5. **Build the layout.** Use only classes from `components/`. Use the user's description to decide which components to include. Reference `screens/example.html` for structural patterns.
 
-5. **Do not edit `index.html`** — the canvas auto-discovers screens via `/api/screens`.
+6. **Do not edit `index.html`** — the canvas auto-discovers screens via `/api/screens`.
 
-6. **Confirm completion** with the filename and a brief description of what was built.
+7. **Confirm completion** with the filename, group (if any), and a brief description of what was built.
 
 ## Notes
 
