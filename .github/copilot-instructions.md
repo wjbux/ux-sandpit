@@ -106,15 +106,24 @@ All are included via `SCREEN_IMPORTS`. Use these freely in templates:
 
 ---
 
+## Reference images
+
+Users cannot paste images directly into chat. Instead, reference screenshots are saved to `assets/references/` and the user provides the filename. **Always read the image file before building** — do not guess what it contains.
+
+Example: "Create a settings screen based on assets/references/settings.png"
+
+---
+
 ## How to create a screen
 
 1. Derive the filename as lowercase-hyphenated (e.g. "User Profile" → `user-profile`)
-2. Decide if this screen belongs to a group. If yes, create in `src/app/screens/[group]/[name]/`
-3. Create `[name].ts` using the screen component pattern above
-4. Create `[name].html` with the wireframe layout using Material components
-5. Add a route to `src/app/app.routes.ts`: `{ path: 'screen/[path]', loadComponent: () => import('./screens/[path]/[name]') }`
-6. Add an entry to `src/app/screens/screen-registry.ts`: `{ path: '[path]', label: '[Label]', group: '[Group]' | null }`
-7. Do not edit the canvas or gallery components
+2. If the user references an image, read it from `assets/references/` first and match its layout
+3. Decide if this screen belongs to a group. If yes, create in `src/app/screens/[group]/[name]/`
+4. Create `[name].ts` using the screen component pattern above
+5. Create `[name].html` with the wireframe layout using Material components
+6. Add a route to `src/app/app.routes.ts`: `{ path: 'screen/[path]', loadComponent: () => import('./screens/[path]/[name]') }`
+7. Add an entry to `src/app/screens/screen-registry.ts`: `{ path: '[path]', label: '[Label]', group: '[Group]' | null }`
+8. Do not edit the canvas or gallery components
 
 ## How to update a screen
 
